@@ -200,7 +200,7 @@ void loop()
     if(val == 1)
     {
       RobotUp();
-      delay(30);
+      delay(100);
       RobotStop();
     }
     
@@ -208,7 +208,7 @@ void loop()
     else if(val == 2)
     {
       RobotDown();
-      delay(30);
+      delay(100);
       RobotStop();
     }
     
@@ -216,7 +216,7 @@ void loop()
     if(val == 3)
     {
       RobotLeft();
-      delay(30);
+      delay(100);
       RobotStop();
     }
     
@@ -224,7 +224,7 @@ void loop()
     if(val == 4)
     {
       RobotRight();
-      delay(30);
+      delay(100);
       RobotStop();
     }
     
