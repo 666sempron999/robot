@@ -229,7 +229,7 @@ void loop()
     }
     
     //Включение Antidog
-    if(val == 5);
+    if(val == 5)
     {
       CreateStrob(Anti_dog);
       //RobotStop();
