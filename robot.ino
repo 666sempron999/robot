@@ -28,6 +28,8 @@ boolean charge_status = true;
 boolean power_status = true;
 boolean service_status = false;
 
+int moving_delay = 100;
+
 //Подпрограммы
 
 //Остановка робота и систем
@@ -200,7 +202,7 @@ void loop()
     if(val == 1)
     {
       RobotUp();
-      delay(100);
+      delay(moving_delay);
       RobotStop();
     }
     
@@ -208,7 +210,7 @@ void loop()
     else if(val == 2)
     {
       RobotDown();
-      delay(100);
+      delay(moving_delay);
       RobotStop();
     }
     
@@ -216,7 +218,7 @@ void loop()
     if(val == 3)
     {
       RobotLeft();
-      delay(100);
+      delay(moving_delay);
       RobotStop();
     }
     
@@ -224,7 +226,7 @@ void loop()
     if(val == 4)
     {
       RobotRight();
-      delay(100);
+      delay(moving_delay);
       RobotStop();
     }
     
