@@ -78,34 +78,45 @@ void RobotRight()
   digitalWrite(B, LOW);
 }
 
+//Диагональные движения
+
 //Вверх и право
 void RobotUp_Right()
 {
-  RobotUp();
-  RobotRight();
+  digitalWrite(A, LOW);
+  digitalWrite(B, HIGH);
+  digitalWrite(C, LOW);
+  digitalWrite(D, HIGH);
 }
 
 //Вверх и лево
 void RobotUp_Left()
 {
-  RobotUp();
-  RobotLeft();
+  digitalWrite(A, LOW);
+  digitalWrite(B, HIGH);
+  digitalWrite(C, HIGH);
+  digitalWrite(D, LOW);
 }
 
 //Вниз и право
 void RobotDown_Right()
 {
-  RobotDown();
-  RobotRight();
+  digitalWrite(A, HIGH);
+  digitalWrite(B, LOW);
+  digitalWrite(C, LOW);
+  digitalWrite(D, HIGH);
 }
 
 //Вниз и лево
 void RobotDown_Left()
 {
-  RobotDown();
-  RobotLeft();
+  digitalWrite(A, HIGH);
+  digitalWrite(B, LOW);
+  digitalWrite(C, HIGH);
+  digitalWrite(D, LOW);
 }
 
+//---------------------------------------------
 
 //Создание строба на выходе указанного пина (длительность 100 милисекунд)
 void CreateStrob(uint8_t pin_number)
