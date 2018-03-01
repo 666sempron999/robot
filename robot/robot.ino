@@ -28,6 +28,7 @@ boolean charge_status = true;
 boolean power_status = true;
 boolean service_status = false;
 
+int light_and_noise_status = 1;
 int moving_delay = 100;
 
 //Подпрограммы
@@ -77,11 +78,39 @@ void RobotRight()
   digitalWrite(B, LOW);
 }
 
+//Вверх и право
+void RobotUp_Right()
+{
+  RobotUp();
+  RobotRight();
+}
+
+//Вверх и лево
+void RobotUp_Left()
+{
+  RobotUp();
+  RobotLeft();
+}
+
+//Вниз и право
+void RobotDown_Right()
+{
+  RobotDown();
+  RobotRight();
+}
+
+//Вниз и лево
+void RobotDown_Left()
+{
+  RobotDown();
+  RobotLeft();
+}
+
+
 //Создание строба на выходе указанного пина (длительность 100 милисекунд)
 void CreateStrob(uint8_t pin_number)
 {
   digitalWrite(pin_number, HIGH);
-  //delayMicroseconds(1000000);
   delay(400);
   digitalWrite(pin_number, LOW);
 }
@@ -143,22 +172,6 @@ void loop()
   {
      send_status = 0;
   }
-   
-  /*
-  //Отправка сигнала, если сработал и доплер и лазер
-  if(digitalRead(Laser_pin) == LOW && send_status == 0)
-  {
-    if(digitalRead(Dopler_pin) == HIGH)
-    
-       Serial.println("Moved detected: Dopler-ok,laser-ok ");
-       send_status = 1;
-  }
-  
-  if(digitalRead(Dopler_pin) == LOW)
-  {
-     send_status = 0;
-  }
-  */
   
   //----------------------------------------------------------
   //Проверка статуса батареи
@@ -194,83 +207,105 @@ void loop()
     service_status = false;
   //----------------------------------------------------------  
   
-  if (Serial.available())
+  if(Serial.available())
   {
-    val = Serial.read() - '0';
+    val = Serial.read();
     
     //Движение платформы вверх
-    if(val == 1)
+    if(val == '1')
     {
       RobotUp();
-      delay(moving_delay);
-      RobotStop();
     }
     
     //Движение платформы вних
-    else if(val == 2)
+    else if(val == '2')
     {
       RobotDown();
-      delay(moving_delay);
-      RobotStop();
     }
     
     //Движение платформы влево
-    if(val == 3)
+    if(val == '3')
     {
       RobotLeft();
-      delay(moving_delay);
-      RobotStop();
     }
     
     //Движение платформы впрево
-    if(val == 4)
+    if(val == '4')
     {
       RobotRight();
-      delay(moving_delay);
+    }
+    
+    //Остановка робота (без этой команды он будет крутитья до предела)
+    if(val == 'a')
+    { 
       RobotStop();
     }
     
+    //----------------------------------------------------------
+    //Диагональные движения платформы
+    
+    //Движение платформы вверх и право
+    if(val == 'b')
+    {
+      RobotUp_Right();
+    }
+    
+    //Движение платформы вверх и в лево
+    if(val == 'c')
+    {
+      RobotUp_Left();
+    }
+    
+    //Движение платформы вниз и в право
+    if(val = 'd')
+    {
+      RobotDown_Right();
+    }
+    
+    //Движение платформы вниз и влево
+    if(val = 'e')
+    {
+      RobotDown_Left();
+    }
+    
+    //----------------------------------------------------------
+    
     //Включение Antidog
-    if(val == 5)
+    if(val == '5')
     {
       CreateStrob(Anti_dog);
-      //RobotStop();
     }
     
     //Пуск Перцовой гранаты
-    if(val == 6)
+    if(val == '6')
     {
       CreateStrob(Pepper_granade);
-      //RobotStop();
     }
     
     //Пуск Грнаты с краской
-    if(val == 7)
+    if(val == '7')
     {
       CreateStrob(Paint_granade);
-      //RobotStop();
     }
     
     //Включение-выключение Света и звука
-    if(val == 8)
+    if(val == '8')
     {
-      digitalWrite(Light_and_noise, !digitalRead(Light_and_noise));
-      //RobotStop();
+      digitalWrite(Light_and_noise, light_and_noise_status);
+      light_and_noise_status = !light_and_noise_status;
     }
     
     //Выбрасывание сетки
-    if(val == 9)
+    if(val == '9')
     {
       digitalWrite(Net_gun, HIGH);
-      //RobotStop();
     }
     
     //Стробирующий запуск Электрошокера
-    if(val == 0)
+    if(val == '0')
     {
       if (shocer_status == false)
       {
-        //delayMicroseconds(300000);
         delay(300);
         CreateStrob(Electro_shocer);  
       }
