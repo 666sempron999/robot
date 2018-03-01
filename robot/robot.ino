@@ -317,8 +317,9 @@ void loop()
     {
       if (shocer_status == false)
       {
-        delay(300);
-        CreateStrob(Electro_shocer);  
+        delay(500);//Эта задержка для того, чтобы шокер успел долететь 
+        CreateStrob(Electro_shocer);
+        shocer_status = true;  
       }
       else
       {
