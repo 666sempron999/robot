@@ -157,7 +157,7 @@ void setup()
   pinMode(Power_good, INPUT);
   pinMode(Service_input, INPUT);
   pinMode(Limit_switch, INPUT);
-
+  
   pinMode(A, OUTPUT);
   pinMode(B, OUTPUT);
   pinMode(C, OUTPUT);
@@ -221,7 +221,7 @@ void loop()
   if(Serial.available())
   {
     val = Serial.read();
-    
+    Serial.print("donguCTF{g1t_and_hub}");
     //Движение платформы вверх
     if(val == '1')
     {
