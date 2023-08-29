@@ -221,7 +221,7 @@ void loop()
   if(Serial.available())
   {
     val = Serial.read();
-    Serial.print("donguCTF{g1t_and_hub}");
+    Serial.print("wrong_flag{this_is_wrong_flag}");
     //Движение платформы вверх
     if(val == '1')
     {
